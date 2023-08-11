@@ -1,0 +1,16 @@
+.panel{
+    max-width: 800px;
+    padding: 20px;
+    margin: auto;
+    background: gainsboro;
+}
+.text-center{
+    text-align: center;
+    color: black;
+}
+table{ width: 100%;}
+table,tr,td{
+    border-bottom-style: dashed;
+}
+.btn{ background: #0CA5EC; color: white; padding: 10px 20px;
+     display: inline-block; text-decoration: none;}
