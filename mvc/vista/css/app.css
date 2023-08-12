@@ -1,16 +1,27 @@
-.panel{
-    max-width: 800px;
-    padding: 20px;
-    margin: auto;
-    background: gainsboro;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    * {
+        @apply box-border m-0; 
+    }
+    body {
+        @apply bg-gray-100;
+    }
 }
-.text-center{
-    text-align: center;
-    color: black;
+
+@layer components {
+    .contain_admin_anim {
+        @apply max-w-max py-4 rounded-lg shadow-md m-auto bg-white;        
+    }
+    .contain_admin_anim table {
+        @apply border-collapse m-auto;
+    }    
+    .contain_admin_anim thead {
+        @apply bg-blue-100 border-y-2 border-blue-200;
+    }
+    .contain_admin_anim th {
+        @apply px-4 py-2;
+    }
 }
-table{ width: 100%;}
-table,tr,td{
-    border-bottom-style: dashed;
-}
-.btn{ background: #0CA5EC; color: white; padding: 10px 20px;
-     display: inline-block; text-decoration: none;}

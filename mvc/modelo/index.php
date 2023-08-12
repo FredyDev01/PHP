@@ -5,7 +5,7 @@ class Modelo{
     private $datos;    
     public function __construct(){
         $this->Modelo = array();
-        $this->db = new PDO('mysql:host=localhost;port=33066;dbname=mvc',"root","12345678");
+        $this->db = new PDO('mysql:host=localhost;port=3306;dbname=db_animeQuest',"root","");
     }
 
     public function insertar($tabla, $data){
