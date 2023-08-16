@@ -15,5 +15,13 @@ class modeloController{
             echo $err;
         }
     }
+
+    public function nuevo(){
+        require_once("vista/nuevo.php");
+    }
+
+    public function guardar() {
+        var_dump($_FILES);
+    }    
 }
 ?>

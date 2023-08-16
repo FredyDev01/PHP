@@ -4,12 +4,12 @@ module.exports = {
   content: ["./vista/**/*.{html,js,php}"],
   theme: {
     extend: {
-      colors: {
-        transIndigo: 'rgb(129, 140, 248, .5)',
+      width: {
+        form: "520px",
       },
-      boxShadow: {
-        input: '0 0 0 .2rem',
-      },      
+      backgroundImage: {
+        bgVistaNuevo: "linear-gradient(to left, transparent, transparent), url(../assets/bgNuevo.jpg)",
+      }
     },
   },
   plugins: [],
