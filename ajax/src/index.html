@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora suma</title>
+    <script
+        src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+        crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="./css/tailwind.css">
+    <link rel="icon" href="./assets/icon.png">
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col justify-center items-center gap-10">        
+    <h1 class="text-2xl font-bold table">
+        Adicione numeros
+        <hr class="border-none w-9/12 h-1 mt-2.5 rounded-lg bg-indigo-500 mx-auto">
+    </h1>    
+    <img src="./assets/Calculator.png" alt="mycalculadora" class="w-48">
+    <main class="bg-white p-5 rounded-lg shadow-md">        
+        Ingrese el Nro 1:
+        <input type="text" name="caja_texto" id="valor1" value="0" class="TextField">
+        <br><br>
+        Ingrese el Nro 2:
+        <input type="text" name="caja_texto" id="valor2" value="0" class="TextField">
+        <br><br>
+        <select name="caja_select" id="valor3">
+            <option value="sum">Sumar</option>
+            <option value="mul">Multiplicar</option>
+            <option value="div">Dividir</option>
+        </select>
+        <input 
+            type="button" 
+            href="javascript:;"
+            onclick="realizarProceso($('#valor1').val(), $('#valor2').val(), $('#valor3').val());return false;"
+            value="Calcular"
+            class="w-full bg-gradient-to-tr from-indigo-300  to-indigo-500 text-white py-2 rounded-md cursor-pointer hover:bg-gradient-to-bl"
+        >
+        <br><br>        
+        <div class="w-full px-4 text-center">
+            Resultado:
+            <strong id="resultado" class="truncate">0</strong> <br>
+        </div>
+    </main>
+</body>
+<script src="./javascript/myscript.js"></script>
+</html>
