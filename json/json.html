@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON HTML</title>
+</head>
+<body>
+    <h2>Recuperamos los datos del JSON senati</h2>
+    <div id="json"></div>
+</body>
+<script>
+    const JSONData = {
+        "id": 1, 
+        "name": "Fredy", 
+        "edad": 19,
+        "distrito": "independencia",
+        "hobbys": ["Leer libros", "Programar", "Correr"],         
+    };
+    try{
+        const JSONString = JSON.stringify(JSONData);
+        //Esto nos permite enlazar los datos en el html dentro del elemento json
+        //mediante una conversion de JSON a string.
+        const JSONDisplay = document.querySelector('#json');
+        JSONDisplay.innerHTML = JSONString;
+    }catch(err){
+        console.log(err)
+    }
+</script>
+</html>
