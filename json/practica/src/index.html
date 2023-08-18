@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos JSON</title>    
+    <!--Alerta toastify-->
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">    
+    <!--JQuery-->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>    
+    <!--Framework tailwind-->
+    <link rel="stylesheet" href="css/tailwind.css">    
+</head>
+<body>
+    <main class="flex flex-wrap-reverse items-end justify-center gap-4">
+        <div class="container">
+            <h1 class="title">Registra un producto:</h1>
+            <form class="mt-10 flex flex-col gap-4" onsubmit="onAddProduct(event)">
+                <div class="textfield">
+                    <input id="txtNombre" name="nombre" type="text" placeholder="Ingrese un nombre">
+                </div>
+                <div class="textfield">
+                    <input id="txtPrecio" name="precio" type="number" placeholder="Ingrese un precio">
+                </div>
+                <div class="textfield">
+                    <input id="txtStock" name="stock" type="number" placeholder="Ingrese el stock">
+                </div>
+                <div class="textfield">
+                    <input id="txtEnvió" name="envió" type="text" placeholder="Ingrese el envió">
+                </div>
+                <div class="textfield">
+                    <input id="txtCaducidad" name="caducidad" type="text" placeholder="Ingrese la caducidad">
+                </div>                                                            
+                <button class="btn_primary mt-10">Crear producto</button>
+            </form>
+        </div>
+        <div class="container">
+            <h1 class="title">Gestiona tus productos:</h1>
+            <div class="table_main_contain mt-10">
+                <table>
+                    <thead>        
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                            <th>Envió</th>
+                            <th>Caducidad</th>
+                        </tr>        
+                    </thead>
+                    <tbody id="data"></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</body>
+<script src="./js/myscript.js"></script>
+</html>
