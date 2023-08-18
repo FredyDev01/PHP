@@ -9,34 +9,58 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">    
     <!--JQuery-->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>    
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">  
     <!--Framework tailwind-->
     <link rel="stylesheet" href="css/tailwind.css">    
 </head>
 <body>
-    <main class="flex flex-wrap-reverse items-end justify-center gap-4">
-        <div class="container">
-            <h1 class="title">Registra un producto:</h1>
+    <main class="flex flex-wrap-reverse items-end justify-center gap-x-4 gap-y-10">
+        <div class="container min-w-[340px]">
+            <h1 class="title">Registra un producto: <hr></h1>
             <form class="mt-10 flex flex-col gap-4" onsubmit="onAddProduct(event)">
-                <div class="textfield">
+                <div class="textfield">                                                          
                     <input id="txtNombre" name="nombre" type="text" placeholder="Ingrese un nombre">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>                   
                 </div>
-                <div class="textfield">
+                <div class="textfield">                                        
                     <input id="txtPrecio" name="precio" type="number" placeholder="Ingrese un precio">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
+                    </svg>                  
                 </div>
-                <div class="textfield">
+                <div class="textfield">                  
                     <input id="txtStock" name="stock" type="number" placeholder="Ingrese el stock">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+                    </svg>                    
                 </div>
-                <div class="textfield">
-                    <input id="txtEnvió" name="envió" type="text" placeholder="Ingrese el envió">
+                <div class="textfield">                                        
+                    <input id="txtEnvió" name="envió" type="text" placeholder="fecha de envió" autocomplete="off">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                    </svg>                  
                 </div>
-                <div class="textfield">
-                    <input id="txtCaducidad" name="caducidad" type="text" placeholder="Ingrese la caducidad">
-                </div>                                                            
+                <div class="textfield">                     
+                    <input id="txtCaducidad" name="caducidad" type="text" placeholder="fecha de caducidad" autocomplete="off">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                    </svg>                   
+                </div>                                                  
+                <div class="textfield">                                                           
+                    <textarea id="txtObservación" name="observación" placeholder="Ingrese la observación"></textarea>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>                   
+                </div>                      
                 <button class="btn_primary mt-10">Crear producto</button>
             </form>
         </div>
         <div class="container">
-            <h1 class="title">Gestiona tus productos:</h1>
+            <h1 class="title">Gestiona tus productos: <hr></h1>
             <div class="table_main_contain mt-10">
                 <table>
                     <thead>        
@@ -47,6 +71,7 @@
                             <th>Stock</th>
                             <th>Envió</th>
                             <th>Caducidad</th>
+                            <th>Observacion</th>
                         </tr>        
                     </thead>
                     <tbody id="data"></tbody>

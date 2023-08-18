@@ -14,8 +14,9 @@
         $stock = $JsonData->stock;
         $envió = $JsonData->envió;
         $caducidad = $JsonData->caducidad;
-        
-        $insert = $db->exec("INSERT INTO productos VALUES(NULL, '$nombre', $precio, $stock, '$envió', '$caducidad')");                
+        $observación = $JsonData->observación;
+
+        $insert = $db->exec("INSERT INTO productos VALUES(NULL, '$nombre', $precio, $stock, '$envió', '$caducidad', '$observación')");                
         $response = ["res" => true];
         echo json_encode($response);    
 

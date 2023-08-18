@@ -32,6 +32,19 @@
 }
 
 @layer components {
+    .table_admin_anim {
+        @apply w-full m-auto mt-4 border-collapse text-center;
+    }    
+    .table_admin_anim thead {
+        @apply bg-indigo-400 text-white font-medium;
+    }    
+    .table_admin_anim th,
+    .table_admin_anim td {
+        @apply p-4;
+    }
+}
+
+@layer components {
     .formItem {
         @apply relative table;
     }
@@ -66,18 +79,5 @@
     }
     .btn_icon_danger {
         @apply p-2 border rounded-md border-red-500 text-red-500 transition duration-300 hover:bg-red-500 hover:text-white;
-    }
-}
-
-@layer components {
-    .table_admin_anim {
-        @apply w-full m-auto mt-4 border-collapse text-center;
-    }    
-    .table_admin_anim thead {
-        @apply bg-indigo-400 text-white font-medium;
-    }    
-    .table_admin_anim th,
-    .table_admin_anim td {
-        @apply p-4;
     }
 }

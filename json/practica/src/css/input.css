@@ -7,31 +7,28 @@
         @apply m-0 box-border;
     }
     body {
-        @apply w-full min-h-screen p-4 relative bg-no-repeat bg-cover bg-center bg-fixed bg-[url("../assets/bgPage.png")] grid place-content-center;
+        @apply w-full min-h-screen px-4 py-10 relative bg-no-repeat bg-cover bg-center bg-fixed bg-[url("../assets/bgPage.png")] grid place-content-center;
     }    
     body::before {
         @apply content-[''] absolute inset-0 backdrop-blur-lg bg-gray-600 opacity-50 -z-10;
     }
-    button, input, td, p {
+    button, input, textarea, td, p {
         @apply text-sm;
     }
 }
 
 @layer components{
     .container {
-        @apply w-auto max-w-full px-7 py-5 bg-white rounded-lg overflow-hidden shadow-md;
+        @apply w-auto max-w-full px-7 py-6 bg-white rounded-lg overflow-hidden shadow-md;
     }
 }
 
 @layer components {
     .title {
-        @apply text-xl font-medium;
+        @apply table m-auto text-xl font-medium;
     }
-}
-
-@layer components {
-    .btn_primary {
-        @apply px-4 py-2 bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-md hover:bg-gradient-to-tl;
+    .title > hr {
+        @apply w-5/12 h-[3px] mt-1.5 mx-auto border-0 rounded-full bg-blue-500; 
     }
 }
 
@@ -58,10 +55,23 @@
 }
 
 @layer components {
-    .textfield {
-        @apply w-full
+    .btn_primary {
+        @apply px-4 py-2 bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-md hover:bg-gradient-to-tl;
     }
-    .textfield > input {
-        @apply block px-3.5 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-400 focus:shadow-[0_0_0_.2rem_rgba(59,130,246,.5)]
+}
+
+@layer components {
+    .textfield {
+        @apply relative block;
+    }
+    .textfield > svg {
+        @apply w-5 h-5 absolute top-1/2 -translate-y-1/2 left-3.5 stroke-gray-400;
+    }
+    .textfield > input,
+    .textfield > textarea {
+        @apply w-full pl-[46px] pr-3.5 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:border-blue-400 focus:shadow-[0_0_0_.2rem_rgba(59,130,246,.5)] [&~svg]:focus:stroke-blue-500;
+    }
+    .textfield > textarea {
+        @apply min-h-[120px] max-h-[150px] [&~svg]:top-2.5 [&~svg]:translate-y-0;
     }
 }
