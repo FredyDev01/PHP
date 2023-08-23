@@ -1,0 +1,6 @@
+button > svg {
+    width: 20px;
+    height: 20px;
+    color: rgb(38, 141, 200);    
+    pointer-events: none;
+}

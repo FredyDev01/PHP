@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+    * {
+        @apply m-0 box-border; 
+    }
+    
+    *:disabled {
+        @apply opacity-50 [&~svg]:opacity-50 [&~label]:opacity-50;
+    }
+
+    body {
+        @apply max-w-7xl min-h-screen p-10 m-auto scroll-smooth flex flex-col justify-center items-center;
+    }    
+
+    a,
+    p, 
+    button, 
+    table, 
+    input, 
+    select, 
+    textarea {
+        @apply text-sm;
+    }        
+
+    a, button {
+        @apply flex justify-center items-center gap-1.5 disabled:cursor-not-allowed [&>svg]:w-4 [&>svg]:h-4;
+    }     
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {        
+        -webkit-appearance: none;
+    }
+}
+
+
+@layer components {
+    .titleSmall {
+        @apply table mx-auto text-center font-medium text-2xl text-gray-800;
+    }
+    
+    .titleSmall > hr {
+        @apply w-9/12 h-1 mt-1 rounded-lg bg-indigo-500 m-auto
+    }
+}
+
+
+@layer components {
+    .table_admin_anim {
+        @apply w-full mx-auto border-collapse text-center;
+    }    
+    
+    .table_admin_anim thead {
+        @apply bg-indigo-400 text-white font-medium;
+    }    
+    
+    .table_admin_anim th,
+    .table_admin_anim td {
+        @apply p-4;
+    }
+}
+
+
+@layer components {
+    .formItem {
+        @apply relative table;
+    }
+    
+    .formItem *:first-child {
+        @apply w-full block pl-9 pr-4 py-2.5 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-400 focus:shadow-[0_0_0_.2rem_rgba(129,140,248,.5)] [&~svg]:focus:text-indigo-500; 
+    }
+    
+    .formItem.iconRight *:first-child {
+        @apply pl-4 pr-9;
+    }    
+    
+    .formItem > input {
+        @apply focus:text-black
+    }
+    
+    .formItem > select {
+        @apply appearance-none text-gray-400;
+    }
+    
+    .formItem > select > option {
+        @apply bg-white text-black;
+    }    
+    
+    .formItem > textarea {
+        @apply min-h-[150px] max-h-[200px] [&~svg]:top-2.5 [&~svg]:translate-y-0;
+    }    
+    
+    .formItem > svg {
+        @apply w-5 h-5 absolute left-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none;
+    }  
+    
+    .formItem.iconRight > svg {
+        @apply left-auto right-2;
+    }
+}
+
+
+@layer components {
+    .btn_primary,
+    .btn_danger {
+        @apply px-3 py-2 bg-gradient-to-r [&:not(:disabled)]:hover:bg-gradient-to-tr rounded-md text-white;
+    }
+    
+    .btn_primary {
+        @apply from-indigo-400 to-blue-800 focus:shadow-[0_0_0_.2rem_rgba(129,140,248,.5)];
+    }
+    .btn_danger {
+        @apply from-rose-400 to-red-800 focus:shadow-[0_0_0_.2rem_rgba(251,113,113,.5)];
+    }
+    
+    .btn_icon_primary,
+    .btn_icon_danger {
+        @apply p-2 border rounded-md transition duration-300 hover:text-white;        
+    }
+    .btn_icon_primary {
+        @apply border-indigo-500 text-indigo-500 hover:bg-indigo-500;
+    }
+    .btn_icon_danger {
+        @apply border-red-500 text-red-500 hover:bg-red-500;
+    }    
+
+    .loading {
+        @apply relative [&>svg]:hidden [&>svg]:absolute [&>svg]:animate-spin [&>svg]:fill-white [&>span]:disabled:invisible [&>svg]:disabled:block;
+    }
+}
