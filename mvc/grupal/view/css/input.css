@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+    * {        
+        @apply m-0 box-border;
+    }
+    *:disabled {
+        @apply opacity-50;
+    }
+    *:disabled:not(button){
+        @apply [&~*]:opacity-50 [&~*]:pointer-events-none [&~*]:select-none;
+    }
+
+    body {
+        @apply w-full min-h-screen bg-gray-900;
+    }
+
+    h2 {
+        @apply text-white text-lg font-bold table mx-auto;
+    }
+    h2 > hr {
+        @apply w-1/2 h-0.5 mt-1.5 mx-auto border-0 rounded-full bg-orange-600;
+    }
+
+    p,
+    td,    
+    input,
+    button {
+        @apply text-sm;
+    }
+
+    button:disabled {
+        @apply cursor-not-allowed;
+    }
+}
+
+
+@layer components {
+    .mainContainer {
+        @apply px-7 py-5 bg-gray-700 rounded-md shadow-md;
+    }
+}
+
+
+@layer components {
+    .textfield {
+        @apply block relative; 
+    }
+
+    .textfield > input {
+        @apply w-full pl-11 pr-3 py-2.5 border border-gray-600 rounded-md bg-transparent text-white placeholder:text-gray-500 focus:outline-none focus:border-orange-600 focus:shadow-[0_0_0_.1rem_rgba(249,115,22,.5)] [&~svg]:focus:text-orange-600;
+    }
+
+    .textfield > svg {
+        @apply w-5 h-5 pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-gray-500;
+    }
+}
+
+
+@layer components {
+    .btnGradient {
+        @apply px-3 py-2 bg-gradient-to-tr rounded-md text-white enabled:hover:bg-gradient-to-bl;
+    }
+    .btnGradient.primary {
+        @apply from-orange-600 to-orange-800;
+    }
+    .btnGradient.danger {
+        @apply from-red-600 to-red-800;
+    }
+
+    .btnIcon {
+        @apply w-7 h-7 border rounded-md flex items-center justify-center transition duration-300;
+    } 
+    .btnIcon > svg {
+        @apply w-4 h-4 pointer-events-none
+    }
+    .btnIcon.success {
+        @apply border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white;
+    }
+    .btnIcon.danger {
+        @apply border-red-500 text-red-500 hover:bg-red-500 hover:text-white;
+    }
+    
+    .btnloading {
+        @apply relative flex justify-center items-center [&>span]:visible [&>span]:disabled:invisible [&>svg]:absolute [&>svg]:hidden [&>svg]:disabled:block;
+    }
+}
+
+
+@layer components {
+    .mainTable {
+        @apply border-collapse max-w-full min-w-max rounded-t-md overflow-hidden text-center;
+    }
+    .mainTable thead {
+        @apply bg-gradient-to-tl to-orange-500 from-orange-600 text-white;
+    }
+    .mainTable tbody {
+        @apply text-[rgb(175,182,193)];
+    } 
+    .mainTable > tbody > tr {
+        @apply last:border-b-0 border-b border-gray-600;
+    }    
+    .mainTable th,
+    .mainTable td {
+        @apply px-4 py-3;
+    }        
+}

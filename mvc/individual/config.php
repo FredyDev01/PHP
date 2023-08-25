@@ -13,5 +13,5 @@
     ]);
 
     /*--------- RUTA GLOBAL ---------*/
-    define("urlsite","http://localhost:85/PHP/mvc");
+    define("urlsite","http://localhost:85/PHP/mvc/individual");
 ?>

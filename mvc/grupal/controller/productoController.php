@@ -4,7 +4,7 @@ require_once('./model/productoModel.php');
 class productoController{
     public static function obtenerProductos() {        
         try{            
-            $mostrar_producto = new productoModel(null, null, null, null);            
+            $mostrar_producto = new productoModel(null, null, null, null, null);            
             $data = $mostrar_producto->mostrar();
             $response = [
                 'res' => true,
@@ -20,9 +20,10 @@ class productoController{
         }
     }
 
-    public static function agregarProductos() {
+    public static function agregarProductos() {        
         try{
             $producto = new productoModel(
+                $_FILES['imagen']['tmp_name'],
                 null,
                 $_POST['nombre'],
                 $_POST['precio'],
@@ -37,13 +38,13 @@ class productoController{
                 'error' => $err->getMessage()
             ];
             echo json_encode($response);
-        }        
+        }       
     }
 
     public static function eliminarProducto() {
         try{
-            $producto = new productoModel(null,null,null,null);
-            $data = $producto->eliminar($_GET['id']);            
+            $producto = new productoModel(null, $_GET['public_id'], null, null, null);
+            $data = $producto->eliminar($_GET['id']);
             $response = [
                 "res" => $data
             ];
@@ -58,15 +59,13 @@ class productoController{
     }
 
     public static function actualizarProducto() {
-        try{        
-            $input = file_get_contents('php://input');
-            $data = json_decode($input);
-            //parse_str
+        try{                   
             $producto = new productoModel(
-                null,
-                $data->nombre,
-                $data->precio,
-                $data->stock
+                $_FILES['imagen']['tmp_name'],
+                $_POST['public_id'],
+                $_POST['nombre'],
+                $_POST['precio'],
+                $_POST['stock']
             );
             $status = $producto->actualizar($_GET['id']);
             $response = ["res" => $status];
