@@ -2,27 +2,30 @@
 require_once('./config/database.php');
 use Cloudinary\Api\Upload\UploadApi;
 
-
 class productoModel{    
     private $db;
     private $tmp_image;
     private $public_id;
+    private $categoria;
     private $nombre;
     private $precio;
     private $stock;
+    private $descripcion;
 
-    public function __construct($tmp_image, $public_id, $nombre, $precio, $stock){        
+    public function __construct($tmp_image, $public_id,$categoria, $nombre, $precio, $stock, $descripcion){        
         $this->db = ConexionDB::obtenerConexion();
         $this->tmp_image = $tmp_image;
         $this->public_id = $public_id;
+        $this->categoria = $categoria;
         $this->nombre = $nombre;
         $this->precio = $precio;
         $this->stock = $stock;
+        $this->descripcion = $descripcion;
     }
 
     /*---------- MÉTODOS CRUD PARA LOS PRODUCTOS ----------*/
 
-    public function mostrar() {
+    public function mostrar(){
         try{
             $query = $this->db->query("SELECT * FROM product");
             $data = $query->fetchAll(PDO::FETCH_OBJ);
@@ -32,12 +35,15 @@ class productoModel{
         }
     }
 
-    public function agregar() {
-        $sql = "INSERT INTO product VALUES (NULL, :urlImage, :public_id, :nombre, :precio, :stock)";           
-        $stmt = $this->db->prepare($sql);        
+    public function agregar(){
+        $sql = "INSERT INTO product VALUES (NULL, :categoria, :urlImage, :public_id, :nombre, :precio, :stock, :descripcion)";           
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':categoria', $this->categoria, PDO::PARAM_STR);
         $stmt->bindParam(':nombre', $this->nombre, PDO::PARAM_STR);
-        $stmt->bindParam(':precio', $this->precio, PDO::PARAM_INT);
-        $stmt->bindParam(':stock', $this->stock, PDO::PARAM_INT);        
+        $stmt->bindParam(':precio', $this->precio);
+        $stmt->bindParam(':stock', $this->stock, PDO::PARAM_INT);    
+        $stmt->bindParam(':descripcion', $this->descripcion, PDO::PARAM_STR); 
+           
         try{
             $uploadImage = (new UploadApi())->upload($this->tmp_image, [
                 "folder" => "Fasae-shop"
@@ -67,12 +73,15 @@ class productoModel{
 
     public function actualizar($id){
         $id = (int) $id;
-        $sql = 'UPDATE product SET nombre = :nombre, precio = :precio, stock = :stock WHERE id_producto = :id';
+        $sql = 'UPDATE product SET categoria = :categoria, nombre = :nombre, precio = :precio, stock = :stock, descripcion = :descripcion WHERE id_producto = :id';
         $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':categoria', $this->categoria, PDO::PARAM_STR);
         $stmt->bindParam(':nombre', $this->nombre, PDO::PARAM_STR);
         $stmt->bindParam(':precio', $this->precio, PDO::PARAM_INT);
         $stmt->bindParam(':stock', $this->stock, PDO::PARAM_INT);  
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':descripcion', $this->descripcion, PDO::PARAM_STR); 
+
         try{            
             if(!empty($this->tmp_image)){
                 $newImage = (new UploadApi())->upload($this->tmp_image, [

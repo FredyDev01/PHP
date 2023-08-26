@@ -9,10 +9,11 @@ const btnCancelar = $('#formCancelar')
 const prwImage = $('#prwImagen')
 const plcImage = $('#plcImagen')
 const inpImagen = $('#inpImagen')
+const inpCategoria = $('#inpCategoria')
 const inpNombre = $('#inpNombre')
 const inpPrecio = $('#inpPrecio')
 const inpStock = $('#inpStock')
-
+const inpDescripcion = $('#inpDescripcion')
 
 /*------------ OBTENER TODOS LOS PRODUCTOS ------------*/
 function obtenerProductos(){
@@ -26,12 +27,19 @@ function obtenerProductos(){
                 let filas = ''
                 if(listaProductos.length){                    
                     listaProductos.forEach(producto => {
+
+                        if(producto.descripcion.length == 0){
+                            producto.descripcion = 'Sin descripción'
+                        }
+
                         filas += `
                         <tr>
                             <td><p>${producto.id_producto}</p></td>
+                            <td><p>${producto.categoria} </p></td>
                             <td><p>${producto.nombre} </p></td>
-                            <td><p>S/ ${producto.precio}</p></td>
+                            <td><p>S/ ${(producto.precio).toFixed(2)} </p></td>
                             <td><p>${producto.stock}</p></td>    
+                            <td><p>${producto.descripcion}</p></td>
                             <td>                             
                                 <img class='max-w-[100px] max-h-[40px] mx-auto' src='${producto.url_image}' name='image_${producto.nombre}' />                                
                             </td>
@@ -55,7 +63,7 @@ function obtenerProductos(){
                 } else{
                     filas += `
                     <tr>
-                        <td colspan='6'> No hay Productos </td>
+                        <td colspan='8'> No hay Productos </td>
                     </tr>
                     `
                 }
@@ -105,17 +113,21 @@ function prepararFormulario(id = null) {
         txtEnviar.text('Guardar')
         btnCancelar.addClass('hidden')
         inpImagen.val(null)
+        inpCategoria.val('')
         inpNombre.val('')
         inpPrecio.val('')
-        inpStock.val('')        
+        inpStock.val('')      
+        inpDescripcion.val('')  
     }else{
         editarProducto = listaProductos.find(prd => prd.id_producto === id)
         titulo.html('Editar Producto<hr/>')
         txtEnviar.text('Actualizar')
         btnCancelar.removeClass('hidden')
+        inpCategoria.val(editarProducto.categoria)
         inpNombre.val(editarProducto.nombre)
         inpPrecio.val(editarProducto.precio)
-        inpStock.val(editarProducto.stock)        
+        inpStock.val(editarProducto.stock)
+        inpDescripcion.val(editarProducto.descripcion)          
     }
     visualizarImagen()
 }
@@ -149,6 +161,7 @@ function agregarProductos(e){
             contentType: false,
             processData: false,
             success: function(response){
+                console.log(response)
                 const dataJSON = JSON.parse(response) 
                 if(dataJSON.res){                                                    
                     swal(`Producto ${editarProducto ? 'Actualizado' : 'Agregado'}!`, '', 'success')                    
@@ -177,7 +190,8 @@ function formularioValido() {
     const formElement = [...form[0]]
     for(var element of formElement){
         if(element.tagName === "INPUT") {
-            if(!element.value && (element.type !== "file" || !editarProducto)) {              
+            const required = element.dataset?.required
+            if(!element.value && required !== 'false' && (element.type !== "file" || !editarProducto)) {              
                 valid = false
                 break
             }             
@@ -185,7 +199,6 @@ function formularioValido() {
     }
     return valid
 }
-
 
 function visualizarImagen(event = null){
     const image = event?.target?.files[0]

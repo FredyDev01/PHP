@@ -2,9 +2,9 @@
 require_once('./model/productoModel.php');
 
 class productoController{
-    public static function obtenerProductos() {        
+    public static function obtenerProductos(){        
         try{            
-            $mostrar_producto = new productoModel(null, null, null, null, null);            
+            $mostrar_producto = new productoModel(null, null, null, null, null, null, null);            
             $data = $mostrar_producto->mostrar();
             $response = [
                 'res' => true,
@@ -25,9 +25,11 @@ class productoController{
             $producto = new productoModel(
                 $_FILES['imagen']['tmp_name'],
                 null,
+                $_POST['categoria'],
                 $_POST['nombre'],
                 $_POST['precio'],
-                $_POST['stock']
+                $_POST['stock'],
+                $_POST['descripcion']
             );
             $status = $producto->agregar();
             $response = ["res" => $status];
@@ -43,7 +45,7 @@ class productoController{
 
     public static function eliminarProducto() {
         try{
-            $producto = new productoModel(null, $_GET['public_id'], null, null, null);
+            $producto = new productoModel(null, $_GET['public_id'], null, null, null, null, null);
             $data = $producto->eliminar($_GET['id']);
             $response = [
                 "res" => $data
@@ -63,9 +65,11 @@ class productoController{
             $producto = new productoModel(
                 $_FILES['imagen']['tmp_name'],
                 $_POST['public_id'],
+                $_POST['categoria'],
                 $_POST['nombre'],
                 $_POST['precio'],
-                $_POST['stock']
+                $_POST['stock'],
+                $_POST['descripcion']
             );
             $status = $producto->actualizar($_GET['id']);
             $response = ["res" => $status];

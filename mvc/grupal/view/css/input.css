@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
     * {        
         @apply m-0 box-border;
@@ -15,7 +14,7 @@
     }
 
     body {
-        @apply w-full min-h-screen bg-gray-900;
+        @apply w-full min-h-screen px-10 py-16 bg-gray-900;
     }
 
     h2 {
@@ -28,10 +27,11 @@
     p,
     td,    
     input,
+    select,
+    textarea,
     button {
         @apply text-sm;
     }
-
     button:disabled {
         @apply cursor-not-allowed;
     }
@@ -49,13 +49,33 @@
     .textfield {
         @apply block relative; 
     }
-
-    .textfield > input {
-        @apply w-full pl-11 pr-3 py-2.5 border border-gray-600 rounded-md bg-transparent text-white placeholder:text-gray-500 focus:outline-none focus:border-orange-600 focus:shadow-[0_0_0_.1rem_rgba(249,115,22,.5)] [&~svg]:focus:text-orange-600;
+    .textfield *:first-child {
+        @apply w-full pl-12 pr-4 py-3 border border-gray-600 rounded-md bg-transparent placeholder:text-gray-500 focus:outline-none focus:border-orange-600 focus:shadow-[0_0_0_.1rem_rgba(249,115,22,.5)] [&~svg]:focus:text-orange-600;
+    } 
+    .textfield.iconRight *:first-child {
+        @apply pl-4 pr-12;
+    }
+    .textfield svg {
+        @apply w-5 h-5 pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 stroke-gray-500;
+    }   
+    .textfield.iconRight svg {
+        @apply left-auto right-4;
     }
 
-    .textfield > svg {
-        @apply w-5 h-5 pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-gray-500;
+    .textfield > input,
+    .textfield > textarea {
+        @apply text-white;
+    }
+
+    .textfield > textarea {
+        @apply min-h-[120px] max-h-[160px] [&~svg]:top-3 [&~svg]:translate-y-0;
+    }
+
+    .textfield > select {
+        @apply appearance-none text-gray-500;
+    }
+    .textfield > select > option {
+        @apply bg-white text-black;
     }
 }
 
