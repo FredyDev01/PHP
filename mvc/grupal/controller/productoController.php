@@ -1,6 +1,7 @@
 <?php
 require_once('./model/productoModel.php');
 
+
 class productoController{
     public static function obtenerProductos(){        
         try{            
@@ -83,5 +84,4 @@ class productoController{
         }
     }
 }
-
 ?>

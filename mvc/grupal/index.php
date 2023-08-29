@@ -1,6 +1,6 @@
 <?php
 require_once('./controller/productoController.php');
-require_once("vendor/autoload.php");
+require_once('vendor/autoload.php');
 use Cloudinary\Configuration\Configuration;
 
 Configuration::instance([

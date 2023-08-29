@@ -23,15 +23,14 @@ function obtenerProductos(){
         success: function(response){
             const dataJSON = JSON.parse(response);
             if(dataJSON.res){
-                listaProductos = dataJSON.data;                
+                listaProductos = dataJSON.data;                    
                 let filas = ''
                 if(listaProductos.length){                    
                     listaProductos.forEach(producto => {
-
-                        if(producto.descripcion.length == 0){
-                            producto.descripcion = 'Sin descripción'
+                        let descripción = producto.descripcion 
+                        if(descripción.trim().length == 0){
+                            descripción = 'Sin descripción'
                         }
-
                         filas += `
                         <tr>
                             <td><p>${producto.id_producto}</p></td>
@@ -39,7 +38,13 @@ function obtenerProductos(){
                             <td><p>${producto.nombre} </p></td>
                             <td><p>S/ ${(producto.precio).toFixed(2)} </p></td>
                             <td><p>${producto.stock}</p></td>    
-                            <td><p>${producto.descripcion}</p></td>
+                            <td>
+                                <p>${
+                                    (producto.descripcion).trim().length === 0 
+                                    ? 'Sin descripción' 
+                                    : producto.descripcion
+                                }</p>
+                            </td>
                             <td>                             
                                 <img class='max-w-[100px] max-h-[40px] mx-auto' src='${producto.url_image}' name='image_${producto.nombre}' />                                
                             </td>
@@ -147,7 +152,7 @@ function agregarProductos(e){
     e.preventDefault();        
     const esValido = formularioValido()
     if(esValido){
-        const data = new FormData(e.target)
+        const data = formularioDatos()
         let endpoint = 'agregarProductos' 
         if(editarProducto){
             endpoint = `actualizarProducto&id=${editarProducto.id_producto}` 
@@ -161,7 +166,6 @@ function agregarProductos(e){
             contentType: false,
             processData: false,
             success: function(response){
-                console.log(response)
                 const dataJSON = JSON.parse(response) 
                 if(dataJSON.res){                                                    
                     swal(`Producto ${editarProducto ? 'Actualizado' : 'Agregado'}!`, '', 'success')                    
@@ -186,18 +190,35 @@ function cargarFormulario(status) {
 }
 
 function formularioValido() {        
-    let valid = true
-    const formElement = [...form[0]]
-    for(var element of formElement){
-        if(element.tagName === "INPUT") {
-            const required = element.dataset?.required
-            if(!element.value && required !== 'false' && (element.type !== "file" || !editarProducto)) {              
-                valid = false
-                break
-            }             
-        }
-    }
+    let valid = true    
+    const elements = [...form[0]] 
+    $.each(elements, function() {
+        const {tagName, type, dataset, value} = $(this)[0]
+        if(
+            tagName !== 'BUTTON' && 
+            dataset?.required !== "false" &&
+            (type !== 'file' || !editarProducto) &&             
+            !value
+        ) 
+            return valid = false                    
+    })
     return valid
+}
+
+function formularioDatos() {
+    const data = new FormData()
+    const elements = [...form[0]]
+    $.each(elements, function() {        
+        const {tagName, name, type, value, files} = $(this)[0]
+        if(tagName !== 'BUTTON') {
+            if(type !== 'file' && value?.trim){
+                data.append(name, value.trim())
+            }else{
+                data.append(name, files[0])
+            }
+        }
+    })
+    return data
 }
 
 function visualizarImagen(event = null){

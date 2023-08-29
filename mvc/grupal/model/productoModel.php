@@ -2,6 +2,7 @@
 require_once('./config/database.php');
 use Cloudinary\Api\Upload\UploadApi;
 
+
 class productoModel{    
     private $db;
     private $tmp_image;
@@ -27,7 +28,7 @@ class productoModel{
 
     public function mostrar(){
         try{
-            $query = $this->db->query("SELECT * FROM product");
+            $query = $this->db->query("SELECT * FROM fasae_producs");
             $data = $query->fetchAll(PDO::FETCH_OBJ);
             return $data;  
         }catch(Exception $e) {
@@ -36,7 +37,7 @@ class productoModel{
     }
 
     public function agregar(){
-        $sql = "INSERT INTO product VALUES (NULL, :categoria, :urlImage, :public_id, :nombre, :precio, :stock, :descripcion)";           
+        $sql = "INSERT INTO fasae_producs VALUES (NULL, :categoria, :urlImage, :public_id, :nombre, :precio, :stock, :descripcion)";           
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':categoria', $this->categoria, PDO::PARAM_STR);
         $stmt->bindParam(':nombre', $this->nombre, PDO::PARAM_STR);
@@ -59,7 +60,7 @@ class productoModel{
 
     public function eliminar($id){
         $id = (int) $id;
-        $sql = 'DELETE FROM product WHERE id_producto = :id'; 
+        $sql = 'DELETE FROM fasae_producs WHERE id_producto = :id'; 
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);        
         try {
@@ -73,7 +74,7 @@ class productoModel{
 
     public function actualizar($id){
         $id = (int) $id;
-        $sql = 'UPDATE product SET categoria = :categoria, nombre = :nombre, precio = :precio, stock = :stock, descripcion = :descripcion WHERE id_producto = :id';
+        $sql = 'UPDATE fasae_producs SET categoria = :categoria, nombre = :nombre, precio = :precio, stock = :stock, descripcion = :descripcion WHERE id_producto = :id';
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':categoria', $this->categoria, PDO::PARAM_STR);
         $stmt->bindParam(':nombre', $this->nombre, PDO::PARAM_STR);
